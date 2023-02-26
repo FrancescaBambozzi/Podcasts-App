@@ -9,6 +9,13 @@ class App extends Component {
     }
   }
 
+  // save the state to the browser’s local storage
+  componentDidUpdate() {
+    const localStateString = JSON.stringify(this.state);
+    localStorage.setItem("localStateString", localStateString);
+  }
+
+  //pull the saved state when the UI is rerendered
   componentDidMount() {
     fetch(
       "https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json")
@@ -18,6 +25,15 @@ class App extends Component {
           podcasts: json.feed.entry
         });
       })
+
+    const localStateString = localStorage.getItem("localStateString");
+
+    //make data available between sessions by setting the state from the previous one to the new one
+    if (localStateString) {
+      const savedState = JSON.parse(localStateString);
+      this.setState(savedState);
+    }
+
   }
 
   render() {
@@ -26,8 +42,8 @@ class App extends Component {
       <div className="App">
         <h1>Podcaster</h1>
         <div className="content">
-          { podcasts.map((item) => (
-            <ol key= {item.id.attributes["im:id"]}>
+          {podcasts.map((item) => (
+            <ol key={item.id.attributes["im:id"]}>
               Title: {item.title.label}
             </ol>
           ))}
