@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import PodcastsList from "./PodcastsList";
+import Header from "./Header";
 
 const Home = () => {
     const [podcasts, setPodcasts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [searchInput, setSearchInput] = useState(" ");
 
     useEffect(() => {
         setTimeout(() => {
@@ -21,14 +23,30 @@ const Home = () => {
                 .catch(err => {
                     console.log(err.message)
                 })
-        }, 500);
+        }, 100);
     }, []);
+
+    const searchPodcast = (event) => {
+        const search = event.target.value;
+        setSearchInput(search);
+    }
+
+    //filter the list of podcasts by title and author
+    const filteredPodcasts = podcasts.filter((podcast) => {
+        const name = podcast["im:name"].label;
+        const artist = podcast["im:artist"].label;
+        if (name.includes(searchInput) || artist.includes(searchInput)) {
+            return name, artist;
+        }
+    });
+
+    console.log(podcasts)
 
     return (
         <div className="home">
-            <h1>Podcaster</h1>
-            {isLoading && <div>Loading ...</div>}
-            {podcasts && <PodcastsList podcasts={podcasts} />}
+            <Header isLoading={isLoading}/>
+            <input type="search" placeholder="Filter podcasts..." onChange={searchPodcast} />
+            {filteredPodcasts && <PodcastsList filteredPodcasts={filteredPodcasts} />}
         </div>
     );
 }
