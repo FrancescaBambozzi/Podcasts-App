@@ -22,16 +22,25 @@ const PodcastDetails = () => {
                 console.log(err.message)
             })
     }, []);
+
+
     console.log(podCastDetails)
 
     return (
-        <div className="podcast-details">
+        <div className="page-container">
             <Header />
-            <div className="podcast-card">
-                <img src={podCastDetails.artworkUrl100} alt="podcast-image" />
-                <div className="description">
-                    <h4>{podCastDetails.trackName}<br /><span className="artist">By {podCastDetails.artistName}</span></h4>
-                    <div><strong>Description:</strong><br />
+            <div className="podcast-details-container">
+                <div className="side">
+                    <div className="podcast-content">
+                        <img src={podCastDetails.artworkUrl100} alt="podcast-image" />
+                        <h3>{podCastDetails.trackName}<br /><span>By: {podCastDetails.artistName}</span></h3>
+                        <p><strong>Description:</strong><br /></p>
+                    </div>
+                </div>
+                <div className="main">
+                    <h2>Episodes</h2>
+                    <div className="episodes-container">
+                        <ul>List of Episodes</ul>
                     </div>
                 </div>
             </div>

@@ -43,9 +43,12 @@ const Home = () => {
     console.log(podcasts)
 
     return (
-        <div className="home">
-            <Header isLoading={isLoading}/>
-            <input type="search" placeholder="Filter podcasts..." onChange={searchPodcast} />
+        <div className="page-container">
+            <Header isLoading={isLoading} />
+            <div className="search-container">
+                <p className="count">{podcasts.length}</p>
+                <input className="search-input" type="search" placeholder="Filter podcasts..." onChange={searchPodcast} />
+            </div>
             {filteredPodcasts && <PodcastsList filteredPodcasts={filteredPodcasts} />}
         </div>
     );
