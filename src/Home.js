@@ -40,8 +40,6 @@ const Home = () => {
         }
     });
 
-    console.log(podcasts)
-
     return (
         <div className="page-container">
             <Header isLoading={isLoading} />
