@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Header from "./Header";
 import xml2js from 'xml-js';
+import EpisodesList from "./EpisodesList";
 
 const PodcastDetails = () => {
     const { id } = useParams();
@@ -38,7 +39,6 @@ const PodcastDetails = () => {
                 let description = jsonData.rss.channel.description._cdata || jsonData.rss.channel.description._text;
                 setDescription(description);
                 let episodes = jsonData.rss.channel.item;
-                // console.log(episodes)
                 setEpisodes(episodes);
             })
     })
@@ -57,33 +57,15 @@ const PodcastDetails = () => {
                 <div className="side">
                     <div className="podcast-content">
                         <img src={podCastDetails.artworkUrl600} alt="podcast-image" />
-                        <h3>{podCastDetails.trackName}<br /><span>By: {podCastDetails.artistName}</span></h3>
-                        <p><strong>Description:</strong><br />
-                            <div dangerouslySetInnerHTML={{ __html: "" + description + "" }} />
-                        </p>
+                        <div className="podcast-text">
+                            <h3>{podCastDetails.trackName}<br /><span>By: {podCastDetails.artistName}</span></h3>
+                            <p><strong>Description:</strong><br />
+                                <div dangerouslySetInnerHTML={{ __html: "" + description + "" }} />
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div className="main">
-                    <h2>Episodes: {episodes.length}</h2>
-                    <div className="episodes-container">
-                        <table>
-                            <tr>
-                                <th>Title</th>
-                                <th>Date</th>
-                                <th>Duration</th>
-                            </tr>
-                            {
-                                episodes.map((episode) => (
-                                    <tr>
-                                        <td>{episode.title._text}</td>
-                                        <td>{episode.pubDate._text}</td>
-                                        <td>{episode["itunes:duration"]._text}</td>
-                                    </tr>
-                                ))
-                            }
-                        </table>
-                    </div>
-                </div>
+                {episodes.length > 0 && <EpisodesList episodes={episodes}/>}
             </div>
         </div>
     );

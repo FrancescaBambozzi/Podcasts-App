@@ -191,6 +191,20 @@ p {
   height: 200px;
 }
 
+.podcast-text h3 {
+  padding: 15px 0;
+  border-bottom: 0.5px solid gray;
+}
+.podcast-text h3 span {
+  font-style: italic;
+  text-transform: capitalize;
+  color: gray;
+  font-weight: 400;
+}
+.podcast-text {
+  margin: 15px 0;
+}
+
 .episodes-container {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 15px;

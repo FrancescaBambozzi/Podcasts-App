@@ -5,7 +5,7 @@ const PodcastsList = ({ filteredPodcasts }) => {
         <div className="podcasts-container">
             <ol className="podcasts-list">
                 {filteredPodcasts.map((podcast) => (
-                    <Link to={{ pathname: `/podcast/${podcast.id.attributes["im:id"]}`, state: `${podcast.summary.label}` }} key={podcast.id.attributes["im:id"]}>
+                    <Link to={{ pathname: `/podcast/${podcast.id.attributes["im:id"]}` }} key={podcast.id.attributes["im:id"]}>
                         <li className="card">
                             <div className="card_img">
                                 <img src={podcast["im:image"][2].label} alt="podcast-image" />

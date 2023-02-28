@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./Home";
 import PodcastDetails from "./PodcastDetails";
 import "./App.css";
+import EpisodesList from "./EpisodesList";
 
 function App() {
   return (
