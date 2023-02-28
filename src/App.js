@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./Home";
 import PodcastDetails from "./PodcastDetails";
 import "./App.css";
-import EpisodesList from "./EpisodesList";
+import EpisodeDetails from "./EpisodeDetails";
 
 function App() {
   return (
@@ -14,6 +14,9 @@ function App() {
           </Route>
           <Route path="/podcast/:id">
             <PodcastDetails />
+          </Route>
+          <Route path="/episode/:episodeId">
+            <EpisodeDetails />
           </Route>
         </Switch>
       </div>

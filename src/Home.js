@@ -5,7 +5,7 @@ import Header from "./Header";
 const Home = () => {
     const [podcasts, setPodcasts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [searchInput, setSearchInput] = useState(" ");
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         setTimeout(() => {
@@ -26,30 +26,22 @@ const Home = () => {
         }, 100);
     }, []);
 
-    const searchPodcast = (event) => {
-        const search = event.target.value;
-        setSearchInput(search);
-    }
-
-    //filter the list of podcasts by title and author
-    const filteredPodcasts = podcasts.filter((podcast) => {
-        const name = podcast["im:name"].label;
-        const artist = podcast["im:artist"].label;
-        if (name.includes(searchInput) || artist.includes(searchInput)) {
-            return name, artist;
-        }
+    // Filter items based on search term
+    const filteredItems = podcasts.filter((item) => {
+        let name = item["im:name"].label;
+        let author = item["im:artist"].label;
+        return name.toLowerCase().includes(searchTerm.toLowerCase()) || author.toLowerCase().includes(searchTerm.toLowerCase())
     });
-
-    // console.log(podcasts)
 
     return (
         <div className="page-container">
             <Header isLoading={isLoading} />
             <div className="search-container">
                 <p className="count">{podcasts.length}</p>
-                <input className="search-input" type="search" placeholder="Filter podcasts..." onChange={searchPodcast} />
+                <input type="search" placeholder="Filter podcasts..." value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)} />
             </div>
-            {filteredPodcasts && <PodcastsList filteredPodcasts={filteredPodcasts} />}
+            {podcasts && <PodcastsList filteredItems={filteredItems} />}
         </div>
     );
 }
