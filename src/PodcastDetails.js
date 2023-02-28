@@ -38,6 +38,7 @@ const PodcastDetails = () => {
                 let description = jsonData.rss.channel.description._cdata || jsonData.rss.channel.description._text;
                 setDescription(description);
                 let episodes = jsonData.rss.channel.item;
+                // console.log(episodes)
                 setEpisodes(episodes);
             })
     })
@@ -65,9 +66,22 @@ const PodcastDetails = () => {
                 <div className="main">
                     <h2>Episodes: {episodes.length}</h2>
                     <div className="episodes-container">
-                        <ul>
-                           Episodes List
-                        </ul>
+                        <table>
+                            <tr>
+                                <th>Title</th>
+                                <th>Date</th>
+                                <th>Duration</th>
+                            </tr>
+                            {
+                                episodes.map((episode) => (
+                                    <tr>
+                                        <td>{episode.title._text}</td>
+                                        <td>{episode.pubDate._text}</td>
+                                        <td>{episode["itunes:duration"]._text}</td>
+                                    </tr>
+                                ))
+                            }
+                        </table>
                     </div>
                 </div>
             </div>

@@ -196,3 +196,39 @@ p {
   margin: 15px;
   padding: 20px;
 }
+
+/* Episodes List */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: center;
+  padding: 8px;
+}
+
+th {
+  background-color: white;
+  border-bottom: 0.5px solid gray;
+  color: #000;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+td:first-child {
+  width: 50%;
+}
+
+td:nth-child(2),
+td:last-child {
+  width: 15%;
+  text-align: center;
+}
