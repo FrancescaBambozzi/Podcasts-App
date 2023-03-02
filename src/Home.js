@@ -4,7 +4,7 @@ import Header from "./Header";
 import useFetch from "./useFetch";
 
 const Home = () => {
-    const { podcasts, isLoading } = useFetch();
+    const { podcasts, isLoading } = useFetch('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json');
     const [searchTerm, setSearchTerm] = useState('');
 
     // Filter items based on search term
