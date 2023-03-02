@@ -24,7 +24,6 @@ const PodcastDetails = () => {
             })
             .then(data => {
                 const details = JSON.parse(data.contents);
-                // console.log(details.results[0]);
                 setPodcastDetails(details.results[0]);
                 setFeed(details.results[0].feedUrl);
                 setIsLoading(false);
@@ -32,15 +31,14 @@ const PodcastDetails = () => {
             .catch(err => {
                 console.log(err.message)
             })
-    }, []);
+    }, [id]);
 
     //fetch feedUrl data in JSON format
-    // React Hook useEffect has a missing dependency: 'id'. FETCH SPECIFIC PODCAST ID
     useEffect(() => {
         fetch(feedUrl)
             .then(res => {
                 if (!res.ok) {
-                    throw Error("Failed to fetch XML data");
+                    throw Error("Failed to fetch XML data"); 
                 }
                 return res.text();
             })
@@ -68,7 +66,7 @@ const PodcastDetails = () => {
             <Header isLoading={isLoading}/>
             <div className="podcast-details-container">
                 {<PodcastDetailCard podCastDetails={podCastDetails} description={description} />}
-                {episodes.length > 0 && <EpisodesList episodes={episodes} />}
+                { episodes.length > 0 && <EpisodesList id={id} episodes={episodes} />}
             </div>
         </div>
     );

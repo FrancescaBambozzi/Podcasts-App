@@ -15,7 +15,7 @@ function App() {
           <Route path="/podcast/:id">
             <PodcastDetails />
           </Route>
-          <Route path="/episode/:episodeId">
+          <Route path="/podcast/:id/episode/:episodeId">
             <EpisodeDetails />
           </Route>
         </Switch>
