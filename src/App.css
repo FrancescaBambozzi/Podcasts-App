@@ -218,6 +218,7 @@ p {
   list-style: none;
   padding: 0;
   border-collapse: collapse;
+  width: 100%;
 }
 
 .episodes-list li {
@@ -229,6 +230,10 @@ p {
   padding: 10px;
 }
 
+.episodes-list li p:nth-child(1) {
+  width: 60%;
+}
+
 .colHeaders {
   font-weight: bold;
   background-color: lightgray;
@@ -237,6 +242,10 @@ p {
   flex-flow: row nowrap;
   justify-content: space-between;
   padding: 10px;
+}
+
+.colHeaders p:first-child {
+  width: 60%;
 }
 
 /* Episode section */

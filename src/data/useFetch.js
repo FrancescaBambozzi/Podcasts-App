@@ -5,7 +5,6 @@ const useFetch = (url) => {
     const [podcasts, setPodcasts] = useState(JSON.parse(localStorage.getItem("podcasts")) || []);
     const [isLoading, setIsLoading] = useState(true);
     const [podCastDetails, setPodcastDetails] = useState(JSON.parse(localStorage.getItem("podCastDetails")) || {});
-    const [feedUrl, setFeed] = useState(null);
     const [jsonData, setJSONData] = useState(JSON.parse(localStorage.getItem("jsonData")) || {});
 
     //fetch the podcasts
@@ -15,7 +14,7 @@ const useFetch = (url) => {
                 if (!res.ok) {
                     throw Error("Failed to fetch podcasts");
                 }
-                return res.json()
+                return res.json();
             })
             .then(data => {
                 localStorage.setItem('podcasts', JSON.stringify(data.feed.entry));
@@ -23,9 +22,9 @@ const useFetch = (url) => {
                 setIsLoading(false);
             })
             .catch(err => {
-                console.log(err.message)
+                console.log(err.message);
             })
-    }, [url]);
+    }, [url, podcasts]);
 
     //fetch podcast by id
     useEffect(() => {
@@ -40,17 +39,16 @@ const useFetch = (url) => {
                 const details = JSON.parse(data.contents);
                 localStorage.setItem('podCastDetails', JSON.stringify(details.results[0]));
                 setPodcastDetails(details.results[0]);
-                setFeed(details.results[0].feedUrl);
                 setIsLoading(false);
             })
             .catch(err => {
                 console.log(err.message)
             })
-    }, [url]);
+    }, [url, podCastDetails]);
 
     //fetch feedUrl data in JSON format
     useEffect(() => {
-        fetch(feedUrl)
+        fetch(podCastDetails.feedUrl)
             .then(res => {
                 if (!res.ok) {
                     throw Error("Failed to fetch XML data");
@@ -65,13 +63,13 @@ const useFetch = (url) => {
             .catch(err => {
                 console.log(err.message)
             })
-    })
+    }, [jsonData])
 
     //convert XML string in JSON object
     function xmlToJson(xmlString) {
         const options = { compact: true, ignoreComment: true, spaces: 4 };
         const json = xml2js.xml2json(xmlString, options);
-        return JSON.parse(json);;
+        return JSON.parse(json);
     }
 
     return { podcasts, isLoading, podCastDetails, jsonData };

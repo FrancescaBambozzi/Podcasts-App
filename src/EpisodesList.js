@@ -3,8 +3,8 @@ import { useState } from "react";
 import EpisodeDetails from "./EpisodeDetails";
 
 const EpisodesList = ({ id, jsonData }) => {
-    let episodes = jsonData.rss.channel.item;
     const [showEpisode, setShowEpisode] = useState(true);
+    let episodes = jsonData.rss.channel.item;
 
     const showEpisodeDetails = () => {
         setShowEpisode(false);
