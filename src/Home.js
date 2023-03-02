@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PodcastsList from "./PodcastsList";
 import Header from "./Header";
-import useFetch from "./useFetch";
+import useFetch from "./data/useFetch";
 
 const Home = () => {
     const { podcasts, isLoading } = useFetch('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json');
     const [searchTerm, setSearchTerm] = useState('');
 
-    // Filter items based on search term
+    // Filter podcasts based on search term
     const filteredPodcasts = podcasts.filter((item) => {
         let name = item["im:name"].label;
         let author = item["im:artist"].label;

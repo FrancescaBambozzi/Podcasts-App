@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import EpisodeDetails from "./EpisodeDetails";
 
-const EpisodesList = ({ id, episodes }) => {
+const EpisodesList = ({ id, jsonData }) => {
+    let episodes = jsonData.rss.channel.item;
     const [showEpisode, setShowEpisode] = useState(true);
 
     const showEpisodeDetails = () => {

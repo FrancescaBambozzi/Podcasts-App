@@ -2,13 +2,12 @@ import { useState, useEffect } from "react";
 import xml2js from 'xml-js';
 
 const useFetch = (url) => {
-    const [podcasts, setPodcasts] = useState([]);
+    const [podcasts, setPodcasts] = useState(JSON.parse(localStorage.getItem("podcasts")) || []);
     const [isLoading, setIsLoading] = useState(true);
-    const [podCastDetails, setPodcastDetails] = useState({});
+    const [podCastDetails, setPodcastDetails] = useState(JSON.parse(localStorage.getItem("podCastDetails")) || {});
     const [feedUrl, setFeed] = useState(null);
-    const [description, setDescription] = useState("");
-    const [episodes, setEpisodes] = useState([]);
-    
+    const [jsonData, setJSONData] = useState(JSON.parse(localStorage.getItem("jsonData")) || {});
+
     //fetch the podcasts
     useEffect(() => {
         fetch(url)
@@ -19,6 +18,7 @@ const useFetch = (url) => {
                 return res.json()
             })
             .then(data => {
+                localStorage.setItem('podcasts', JSON.stringify(data.feed.entry));
                 setPodcasts(data.feed.entry);
                 setIsLoading(false);
             })
@@ -38,6 +38,7 @@ const useFetch = (url) => {
             })
             .then(data => {
                 const details = JSON.parse(data.contents);
+                localStorage.setItem('podCastDetails', JSON.stringify(details.results[0]));
                 setPodcastDetails(details.results[0]);
                 setFeed(details.results[0].feedUrl);
                 setIsLoading(false);
@@ -58,10 +59,8 @@ const useFetch = (url) => {
             })
             .then(data => {
                 let jsonData = xmlToJson(data);
-                let description = jsonData.rss.channel.description._cdata || jsonData.rss.channel.description._text;
-                setDescription(description);
-                let episodes = jsonData.rss.channel.item;
-                setEpisodes(episodes);
+                localStorage.setItem('jsonData', JSON.stringify(jsonData));
+                setJSONData(jsonData);
             })
             .catch(err => {
                 console.log(err.message)
@@ -75,7 +74,7 @@ const useFetch = (url) => {
         return JSON.parse(json);;
     }
 
-    return { podcasts, isLoading, podCastDetails, description, episodes };
+    return { podcasts, isLoading, podCastDetails, jsonData };
 
 }
 
