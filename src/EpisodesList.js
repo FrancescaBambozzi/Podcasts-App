@@ -4,7 +4,7 @@ import EpisodeDetails from "./EpisodeDetails";
 
 const EpisodesList = ({ id, jsonData }) => {
     const [showEpisode, setShowEpisode] = useState(true);
-    let episodes = jsonData.rss.channel.item;
+    let episodes = jsonData.item;
 
     const showEpisodeDetails = () => {
         setShowEpisode(false);

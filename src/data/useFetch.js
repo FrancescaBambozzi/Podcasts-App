@@ -57,8 +57,9 @@ const useFetch = (url) => {
             })
             .then(data => {
                 let jsonData = xmlToJson(data);
-                localStorage.setItem('jsonData', JSON.stringify(jsonData));
-                setJSONData(jsonData);
+                //console.log(jsonData.rss.channel)
+                localStorage.setItem('jsonData', JSON.stringify(jsonData.rss.channel));
+                setJSONData(jsonData.rss.channel);
             })
             .catch(err => {
                 console.log(err.message)

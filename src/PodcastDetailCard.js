@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const PodcastDetailCard = ({ podCastDetails, jsonData }) => {
 
-    let description = jsonData.rss.channel.description._cdata || jsonData.rss.channel.description._text;
+    let description = jsonData.description._cdata || jsonData.description._text;
    
     return (
         <div className="side">
