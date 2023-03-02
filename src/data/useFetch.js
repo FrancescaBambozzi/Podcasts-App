@@ -63,7 +63,7 @@ const useFetch = (url) => {
             .catch(err => {
                 console.log(err.message)
             })
-    }, [jsonData])
+    }, [podCastDetails.feedUrl, jsonData])
 
     //convert XML string in JSON object
     function xmlToJson(xmlString) {
