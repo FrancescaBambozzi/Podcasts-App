@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-const PodcastsList = ({ filteredItems }) => {
+const PodcastsList = ({ filteredPodcasts }) => {
 
     return (
         <div className="podcasts-container">
             <ol className="podcasts-list">
-                {filteredItems.map(podcast => (
+                {filteredPodcasts.map(podcast => (
                     <Link to={{ pathname: `/podcast/${podcast.id.attributes["im:id"]}` }} key={podcast.id.attributes["im:id"]}>
                         <li className="card">
                             <div className="card_img">
