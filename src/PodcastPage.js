@@ -63,7 +63,7 @@ const PodcastPage = () => {
         <div className="page-container">
             <Header isLoading={isLoading} />
             <div className="podcast-details-container">
-                <Podcast id={id} podcastDetails={podcastDetails} feedData={feedData} />
+                <Podcast podcastDetails={podcastDetails} feedData={feedData} />
                 <EpisodesList feedData={feedData}/>
             </div>
         </div>
