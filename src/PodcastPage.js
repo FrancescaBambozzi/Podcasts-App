@@ -50,7 +50,7 @@ const PodcastPage = () => {
             .catch(err => {
                 console.log("Fetch podcast's feedURL error:", err.message)
             })
-    })
+    }, [podcastDetails.feedUrl])
 
     //convert XML string in JSON object
     function xmlToJson(xmlString) {
@@ -64,9 +64,11 @@ const PodcastPage = () => {
             <Header isLoading={isLoading} />
             <div className="podcast-details-container">
                 {!isLoading && (
-                    <Podcast podcastDetails={podcastDetails} feedData={feedData} />
+                    <>
+                        <Podcast podcastDetails={podcastDetails} feedData={feedData} />
+                        <EpisodesList feedData={feedData} />
+                    </>
                 )}
-                <EpisodesList feedData={feedData} />
             </div>
         </div>
     );

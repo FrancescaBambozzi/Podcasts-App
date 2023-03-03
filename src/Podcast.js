@@ -6,7 +6,7 @@ const Podcast = ({ podcastDetails, feedData }) => {
 
     return (
         <div className="side">
-            <Link to={`/podcast/${id}`}>
+            <Link to={"/"}>
                 <div className="podcast-content">
                     <img src={podcastDetails.artworkUrl600} alt="podcast" />
                     <div className="podcast-text">
