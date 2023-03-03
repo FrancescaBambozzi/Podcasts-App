@@ -4,7 +4,7 @@ import xml2js from 'xml-js';
 import { useState, useEffect } from "react";
 import Podcast from "./Podcast";
 import EpisodesList from "./EpisodesList";
-
+import Episode from "./Episode";
 
 const PodcastPage = () => {
     const { id } = useParams();
@@ -59,14 +59,26 @@ const PodcastPage = () => {
         return JSON.parse(json);
     }
 
+
+    const [showEpisode, setShowEpisode] = useState(false);
+
+    const handleShowEpisode = () => {
+        setShowEpisode(true);
+    }
+
+    const handleReset = () => {
+        setShowEpisode(false);
+    }
+
+
     return (
         <div className="page-container">
             <Header isLoading={isLoading} />
             <div className="podcast-details-container">
                 {!isLoading && (
                     <>
-                        <Podcast podcastDetails={podcastDetails} feedData={feedData} />
-                        <EpisodesList feedData={feedData} />
+                        <Podcast podcastDetails={podcastDetails} feedData={feedData} handleReset={handleReset} />
+                        {showEpisode ? <Episode /> : <EpisodesList feedData={feedData} handleShowEpisode={handleShowEpisode} />}
                     </>
                 )}
             </div>

@@ -1,11 +1,9 @@
-import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 const Episode = () => {
-    const { id } = useParams();
     const location = useLocation();
     const episode = location.state.episode;
-
+   
     return (
         <div className="main">
             <div>{episode.title._cdata ? (
