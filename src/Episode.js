@@ -8,7 +8,10 @@ const Episode = () => {
 
     return (
         <div className="main">
-            <h2>{episode.title._text}</h2>
+            <div>{episode.title._cdata ? (
+                <h2 dangerouslySetInnerHTML={{ __html: "" + episode.description._cdata + "" }} />
+            ) : (
+                <h2>{episode.title._text}</h2>)}</div>
             <div className="episodes-container">
                 <div>
                     {episode.description._cdata ? (
