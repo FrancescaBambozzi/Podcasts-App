@@ -1,20 +1,32 @@
 import { Link } from "react-router-dom";
+import Episode from "./Episode";
 import { useState } from "react";
-import EpisodeDetails from "./EpisodeDetails";
+import { useParams } from "react-router-dom";
 
-const EpisodesList = ({ id, jsonData }) => {
+const EpisodesList = ({ feedData }) => {
+    const { id } = useParams();
     const [showEpisode, setShowEpisode] = useState(true);
-    let episodes = jsonData.item;
+    const episodes = feedData.item;
 
+    //initially set the episode div to false
     const showEpisodeDetails = () => {
         setShowEpisode(false);
     };
 
+    //date options to format the date string
     const dateOptions = {
         year: 'numeric',
         month: 'numeric',
         day: '2-digit'
     };
+
+    //convert episode audio duration string in hours
+    function secondsToHms(timeString) {
+        let hours = Math.floor(timeString / 3600);
+        let minutes = Math.floor((timeString % 3600) / 60);
+        let seconds = timeString % 60;
+        return `${hours}:${minutes}:${seconds}`;
+    }
 
     return (
         <div>
@@ -22,7 +34,7 @@ const EpisodesList = ({ id, jsonData }) => {
                 <div className="main">
                     <h2>Episodes: {episodes.length}</h2>
                     <div className="episodes-container">
-                        <div className="colHeaders">
+                        <div className="episodes-list-header">
                             <p>Title</p>
                             <p>Date</p>
                             <p>Duration</p>
@@ -31,27 +43,21 @@ const EpisodesList = ({ id, jsonData }) => {
                             {episodes.map((episode) => (
                                 <Link to={{
                                     pathname: `/podcast/${id}/episode/${episode.guid._text}`,
-                                    state: {
-                                        title: `${episode.title._text}`,
-                                        description: `${episode.description._cdata}`,
-                                        audio: `${episode.enclosure._attributes.url}` ? `${episode.enclosure._attributes.url}` : `${episode["media:content"][0]._attributes.url}`
-                                    }
+                                    state: { episode }
                                 }}
-                                    key={episode.guid._text}
                                     onClick={showEpisodeDetails}>
-                                    <li>
+                                    <li key={episode.guid._text}>
                                         <p>{episode.title._text}</p>
                                         <p>{new Date(episode.pubDate._text).toLocaleString('en-US', dateOptions)}</p>
-                                        <p>{episode["itunes:duration"]._text}</p>
+                                        <p>{secondsToHms(parseInt(episode["itunes:duration"]._text))}</p>
                                     </li>
                                 </Link>
                             ))}
                         </ol>
                     </div>
-                </div>) : (
-                <div>
-                    <EpisodeDetails />
                 </div>
+            ) : (
+                <Episode />
             )}
         </div>
     );

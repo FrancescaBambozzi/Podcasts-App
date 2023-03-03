@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./Home";
-import PodcastDetails from "./PodcastDetails";
+import PodcastPage from "./PodcastPage";
 import "./App.css";
-import EpisodeDetails from "./EpisodeDetails";
+import Episode from "./Episode";
 
 function App() {
   return (
@@ -13,10 +13,10 @@ function App() {
             <Home />
           </Route>
           <Route path="/podcast/:id">
-            <PodcastDetails />
+            <PodcastPage />
           </Route>
           <Route path="/podcast/:id/episode/:episodeId">
-            <EpisodeDetails />
+            <Episode />
           </Route>
         </Switch>
       </div>

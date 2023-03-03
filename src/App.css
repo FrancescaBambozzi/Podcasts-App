@@ -151,7 +151,7 @@ p {
   color: gray;
 }
 
-/* DETAILS PAGE */
+/* PODCAST PAGE */
 .podcast-details-container {
   display: table;
   width: 100%;
@@ -234,7 +234,7 @@ p {
   width: 60%;
 }
 
-.colHeaders {
+.episodes-list-header {
   font-weight: bold;
   background-color: lightgray;
   border-bottom: 0.5px solid gray;
@@ -244,7 +244,7 @@ p {
   padding: 10px;
 }
 
-.colHeaders p:first-child {
+.episodes-list-header p:first-child {
   width: 60%;
 }
 
