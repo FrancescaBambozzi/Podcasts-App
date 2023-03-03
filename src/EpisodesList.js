@@ -5,7 +5,6 @@ const EpisodesList = ({ feedData, handleShowEpisode }) => {
     const { id } = useParams();
     const episodes = feedData.item;
 
-
     //date options to format the date string
     const dateOptions = {
         year: 'numeric',

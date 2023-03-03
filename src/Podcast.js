@@ -1,11 +1,4 @@
-import { Link } from "react-router-dom";
-import { useParams, useLocation, useRouteMatch, useHistory } from "react-router-dom";
-import { useState } from "react";
-import EpisodesList from "./EpisodesList";
-
 const Podcast = ({ podcastDetails, feedData, handleReset }) => {
-    const { id } = useParams();
-    
     return (
         <div className="side" onClick={handleReset}>
             <div className="podcast-content">

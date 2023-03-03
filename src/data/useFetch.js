@@ -21,7 +21,7 @@ const useFetch = (url) => {
             .catch(err => {
                 console.log(err.message);
             })
-    }, []);
+    }, [url]);
 
     return { podcasts, isLoading };
 

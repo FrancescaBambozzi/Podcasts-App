@@ -11,6 +11,22 @@ const PodcastPage = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [podcastDetails, setPodcastDetails] = useState(JSON.parse(localStorage.getItem("savedPodcastDetails")) || {});
     const [feedData, setFeedData] = useState(JSON.parse(localStorage.getItem("savedFeedData")) || {});
+    const [showEpisode, setShowEpisode] = useState(false);
+
+    const handleShowEpisode = () => {
+        setShowEpisode(true);
+    }
+
+    const handleReset = () => {
+        setShowEpisode(false);
+    }
+
+    //convert XML string in JSON object
+    function xmlToJson(xmlString) {
+        const options = { compact: true, ignoreComment: true, spaces: 4 };
+        const json = xml2js.xml2json(xmlString, options);
+        return JSON.parse(json);
+    }
 
     //fetch podcast by id
     useEffect(() => {
@@ -50,26 +66,7 @@ const PodcastPage = () => {
             .catch(err => {
                 console.log("Fetch podcast's feedURL error:", err.message)
             })
-    }, [podcastDetails.feedUrl])
-
-    //convert XML string in JSON object
-    function xmlToJson(xmlString) {
-        const options = { compact: true, ignoreComment: true, spaces: 4 };
-        const json = xml2js.xml2json(xmlString, options);
-        return JSON.parse(json);
-    }
-
-
-    const [showEpisode, setShowEpisode] = useState(false);
-
-    const handleShowEpisode = () => {
-        setShowEpisode(true);
-    }
-
-    const handleReset = () => {
-        setShowEpisode(false);
-    }
-
+    }, [podcastDetails.feedUrl]);
 
     return (
         <div className="page-container">
