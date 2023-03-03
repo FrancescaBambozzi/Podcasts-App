@@ -45,8 +45,9 @@ const EpisodesList = ({ feedData }) => {
                                     pathname: `/podcast/${id}/episode/${episode.guid._text}`,
                                     state: { episode }
                                 }}
+                                    key={episode.guid._text}
                                     onClick={showEpisodeDetails}>
-                                    <li key={episode.guid._text}>
+                                    <li>
                                         <p>{episode.title._text}</p>
                                         <p>{new Date(episode.pubDate._text).toLocaleString('en-US', dateOptions)}</p>
                                         <p>{secondsToHms(parseInt(episode["itunes:duration"]._text))}</p>
