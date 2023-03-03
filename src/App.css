@@ -234,6 +234,10 @@ p {
   width: 60%;
 }
 
+.episodes-list li p:nth-child(3) {
+  padding-right: 10px;
+}
+
 .episodes-list-header {
   font-weight: bold;
   background-color: lightgray;

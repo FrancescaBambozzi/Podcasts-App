@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import PodcastPage from "./PodcastPage";
-import { useState } from "react";
 
 const Podcast = ({ podcastDetails, feedData }) => {
     const { id } = useParams();
 
     return (
         <div className="side">
-            <Link to={"/"}>
+            <Link to={`/podcast/${id}`}>
                 <div className="podcast-content">
                     <img src={podcastDetails.artworkUrl600} alt="podcast" />
                     <div className="podcast-text">

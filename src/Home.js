@@ -22,7 +22,7 @@ const Home = () => {
                 <input className="search-input" type="search" placeholder="Filter podcasts..." value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)} />
             </div>
-            <PodcastsList filteredPodcasts={filteredPodcasts} />
+            {!isLoading && (<PodcastsList filteredPodcasts={filteredPodcasts} />)}
         </div>
     );
 }
