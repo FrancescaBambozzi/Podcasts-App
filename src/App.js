@@ -9,7 +9,7 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/Podcasts-App/">
             <Home />
           </Route>
           <Route path="/podcast/:id">
